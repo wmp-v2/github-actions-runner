@@ -7,7 +7,12 @@ RUN               curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s
 # NODEJS
 RUN               dnf module disable nodejs -y && dnf module enable nodejs:22 -y && dnf install nodejs npm -y
 # MAVEN
-RUN               dnf install maven -y
+USER              root
+RUN               dnf install -y yum-utils curl unzip tar gzip git python3-pip maven \
+                  && dnf module disable nodejs -y \
+                  && dnf module enable nodejs:22 -y \
+                  && dnf install -y nodejs npm \
+                  && dnf clean all
 # HELM
 RUN               curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 # ARGOCD
