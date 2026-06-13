@@ -8,7 +8,7 @@ RUN               curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s
 RUN               dnf module disable nodejs -y && dnf module enable nodejs:22 -y && dnf install nodejs npm -y
 # MAVEN
 USER              root
-RUN               dnf install -y yum-utils curl unzip tar gzip git python3-pip maven --allowraising \
+RUN               dnf install -y yum-utils curl unzip tar gzip git python3-pip maven --allowerasing \
                   && dnf module disable nodejs -y \
                   && dnf module enable nodejs:22 -y \
                   && dnf install -y nodejs npm \
